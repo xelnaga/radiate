@@ -1,0 +1,25 @@
+<j:jelly xmlns:j="jelly:core" xmlns:x="jelly:xml">
+<x:doctype name="html"/>
+<html>
+<head>
+    <title>Radiate</title>
+    <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/radiate/css/radiate.css" />
+</head>
+<body>
+    <ol id="jobs">
+	<j:forEach var="jobState" items="${it.jobStates}">
+	    <li>
+	        <h2>${jobState.name} #${jobState.buildNumber}</h2>
+
+	        <ol class="causes">
+	        <j:forEach var="cause" items="${jobState.causes}">
+	            <li>${cause.shortDescription}</li>
+	        </j:forEach>
+	        </ol>
+	        <p>${jobState.duration} ms</p>
+	    </li>
+	</j:forEach>
+    </ol>
+</body>
+</html>
+</j:jelly>
