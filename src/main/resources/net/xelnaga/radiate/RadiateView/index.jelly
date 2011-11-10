@@ -7,16 +7,16 @@
 </head>
 <body>
     <ol id="jobs">
-	<j:forEach var="jobState" items="${it.jobStates}">
+	<j:forEach var="status" items="${it.statuses}">
 	    <li>
-	        <h2>${jobState.name} #${jobState.buildNumber}</h2>
+	        <h2>${status.name} #${status.buildNumber}</h2>
 
 	        <ol class="causes">
-	        <j:forEach var="cause" items="${jobState.causes}">
+	        <j:forEach var="cause" items="${status.causes}">
 	            <li>${cause.shortDescription}</li>
 	        </j:forEach>
 	        </ol>
-	        <p>${jobState.duration} ms</p>
+	        <p>${status.duration} ms</p>
 	    </li>
 	</j:forEach>
     </ol>

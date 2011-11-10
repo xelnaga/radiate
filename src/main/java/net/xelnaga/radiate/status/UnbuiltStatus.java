@@ -3,7 +3,7 @@ package net.xelnaga.radiate.status;
 import hudson.model.Cause;
 import hudson.model.Job;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 class UnbuiltStatus extends Status {
@@ -14,7 +14,7 @@ class UnbuiltStatus extends Status {
 
     @Override
     public List<Cause> getCauses() {
-        return Collections.EMPTY_LIST;
+        return new ArrayList<Cause>();
     }
 
     @Override
@@ -23,7 +23,7 @@ class UnbuiltStatus extends Status {
     }
 
     @Override
-    public long getDurationMs() {
+    public long getDuration() {
         return 0;
     }
 }

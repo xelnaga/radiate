@@ -1,11 +1,15 @@
 package net.xelnaga.radiate.status;
 
-/**
- * Created by IntelliJ IDEA.
- * User: xelnaga
- * Date: 08/11/11
- * Time: 23:11
- * To change this template use File | Settings | File Templates.
- */
+import hudson.model.Job;
+
 public class StatusFactory {
+
+    public Status makeStatus(Job job) {
+
+        if (job.getLastBuild() == null) {
+            return new UnbuiltStatus(job);
+        }
+
+        return new StandardStatus(job);
+    }
 }

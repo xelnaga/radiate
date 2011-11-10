@@ -19,5 +19,5 @@ public abstract class Status {
 
     public abstract List<Cause> getCauses();
     public abstract int getBuildNumber();
-    public abstract long getDurationMs();
+    public abstract long getDuration();
 }

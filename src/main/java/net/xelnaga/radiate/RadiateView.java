@@ -5,6 +5,9 @@ import hudson.model.Job;
 import hudson.model.ListView;
 import hudson.model.TopLevelItem;
 import hudson.model.ViewDescriptor;
+import net.xelnaga.radiate.status.StandardStatus;
+import net.xelnaga.radiate.status.Status;
+import net.xelnaga.radiate.status.StatusFactory;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.util.ArrayList;
@@ -26,17 +29,18 @@ public class RadiateView extends ListView {
 		}
     }
 
-    public List<JobState> getJobStates() {
+    public List<Status> getStatuses() {
 
-        List<JobState> states = new ArrayList<JobState>();
+        List<Status> statuses = new ArrayList<Status>();
+        StatusFactory factory = new StatusFactory();
 
         for (TopLevelItem item : getItems()) {
             if (item instanceof Job) {
-                JobState state = new JobState((Job) item);
-                states.add(state);
+                Status status = factory.makeStatus((Job) item);
+                statuses.add(status);
             }
         }
 
-        return states;
+        return statuses;
     }
 }

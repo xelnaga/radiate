@@ -1,8 +1,3 @@
-body {
-    background: url('/plugin/radiate/images/green_leaves.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
-
 ol, ul {
     margin: 0;
     padding: 0;
@@ -18,10 +13,5 @@ ol#jobs > li {
     margin: 20px 0;
     padding: 5px;
     border: solid 1px black;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px #000;
-    background: url('/plugin/radiate/images/red_leaves_frosted.jpg') no-repeat center center fixed;
-    background-size: cover;
     min-height: 100px;
-    text-shadow: 1px 1px 1px #fff;
 }
