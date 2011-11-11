@@ -2,6 +2,7 @@ package net.xelnaga.radiate.status;
 
 import hudson.model.Cause;
 import hudson.model.Job;
+import hudson.model.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,5 +26,10 @@ class UnbuiltStatus extends Status {
     @Override
     public long getDuration() {
         return 0;
+    }
+
+    @Override
+    public Result getResult() {
+        return Result.NOT_BUILT;
     }
 }

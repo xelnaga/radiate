@@ -3,6 +3,7 @@ package net.xelnaga.radiate.status
 import hudson.model.Cause
 import hudson.model.Job
 import spock.lang.Specification
+import hudson.model.Result
 
 class UnbuiltStatusTest extends Specification {
 
@@ -53,6 +54,16 @@ class UnbuiltStatusTest extends Specification {
 
         then:
             duration == 0
+            0 * _._
+    }
+
+    def 'get result'() {
+
+        when:
+            Result result = status.result
+
+        then:
+            result == Result.NOT_BUILT
             0 * _._
     }
 }

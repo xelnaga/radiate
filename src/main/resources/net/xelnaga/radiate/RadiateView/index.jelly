@@ -17,6 +17,7 @@
 	        </j:forEach>
 	        </ol>
 	        <p>${status.duration} ms</p>
+	        <p>${status.result}</p>
 	    </li>
 	</j:forEach>
     </ol>

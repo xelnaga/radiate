@@ -4,6 +4,8 @@ import spock.lang.Specification
 import hudson.model.Job
 import hudson.model.Cause
 import hudson.model.Run
+import hudson.model.Result
+import hudson.model.BallColor
 
 class StandardStatusTest extends Specification {
 
@@ -62,7 +64,7 @@ class StandardStatusTest extends Specification {
             number == 69
     }
 
-    def 'get duration ms'() {
+    def 'get duration'() {
 
         when:
             long duration = status.duration
@@ -74,5 +76,19 @@ class StandardStatusTest extends Specification {
 
         and:
             duration == 1234L
+    }
+
+    def 'get result' () {
+
+        when:
+            Result result = status.result
+
+        then:
+            1 * mockJob.lastBuild >> mockRun
+            1 * mockRun.result >> Result.ABORTED
+            0 * _._
+
+        and:
+            result.is(Result.ABORTED)
     }
 }

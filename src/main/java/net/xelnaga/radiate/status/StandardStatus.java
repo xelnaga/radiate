@@ -2,6 +2,7 @@ package net.xelnaga.radiate.status;
 
 import hudson.model.Cause;
 import hudson.model.Job;
+import hudson.model.Result;
 
 import java.util.List;
 
@@ -29,5 +30,10 @@ public class StandardStatus extends Status {
     @Override
     public long getDuration() {
         return job.getLastBuild().getDuration();
+    }
+
+    @Override
+    public Result getResult() {
+        return job.getLastBuild().getResult();
     }
 }
