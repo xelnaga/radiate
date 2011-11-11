@@ -4,7 +4,7 @@ import hudson.model.Job
 import hudson.model.Run
 import spock.lang.Specification
 
-class StatusFactorySpec extends Specification {
+class StatusFactoryTest extends Specification {
 
     private StatusFactory factory
     private Job mockJob

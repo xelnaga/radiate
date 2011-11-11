@@ -4,7 +4,7 @@ import hudson.model.Cause
 import hudson.model.Job
 import spock.lang.Specification
 
-class UnbuiltStatusSpec extends Specification {
+class UnbuiltStatusTest extends Specification {
 
     private Status status
     private Job mockJob

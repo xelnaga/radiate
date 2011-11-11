@@ -27,25 +27,6 @@
                 <configuration>
                     <providerSelection>1.7</providerSelection>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-all</artifactId>
-                        <version>1.7.10</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.spockframework</groupId>
-                <artifactId>spock-maven</artifactId>
-                <version>0.5-groovy-1.7</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>find-specs</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -55,6 +36,12 @@
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
             <version>0.5-groovy-1.7</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>1.7.10</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -76,6 +63,15 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
 

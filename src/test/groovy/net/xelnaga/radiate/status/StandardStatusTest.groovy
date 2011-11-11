@@ -5,7 +5,7 @@ import hudson.model.Job
 import hudson.model.Cause
 import hudson.model.Run
 
-class StandardStatusSpec extends Specification {
+class StandardStatusTest extends Specification {
 
     private Status status
     private Job mockJob
