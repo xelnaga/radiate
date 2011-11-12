@@ -73,5 +73,26 @@
         </plugins>
     </reporting>
 
+    <profiles>
+        <profile>
+            <id>jenkins</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>maven.jenkins-ci.org</id>
+                    <url>http://maven.jenkins-ci.org/content/groups/artifacts/</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>maven.jenkins-ci.org</id>
+                    <url>http://maven.jenkins-ci.org/content/groups/artifacts/</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
 </project>
 
