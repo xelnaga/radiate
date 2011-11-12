@@ -5,7 +5,8 @@ import hudson.model.Job
 import hudson.model.Cause
 import hudson.model.Run
 import hudson.model.Result
-import hudson.model.BallColor
+import hudson.scm.ChangeLogSet
+import hudson.model.Build
 
 class StandardStatusTest extends Specification {
 
@@ -78,10 +79,10 @@ class StandardStatusTest extends Specification {
             duration == 1234L
     }
 
-    def 'get result' () {
+    def 'get result'() {
 
         when:
-            Result result = status.result
+            Result actual = status.result
 
         then:
             1 * mockJob.lastBuild >> mockRun
@@ -89,6 +90,23 @@ class StandardStatusTest extends Specification {
             0 * _._
 
         and:
-            result.is(Result.ABORTED)
+            actual.is(Result.ABORTED)
+    }
+
+    def 'get changes'() {
+
+        given:
+            Build mockBuild = Mock(Build)
+            Iterable<ChangeLogSet.Entry> changes = Mock(ChangeLogSet);
+
+        when:
+            Iterable<ChangeLogSet.Entry> actual = status.changes
+
+        then:
+            1 * mockJob.lastBuild >> mockBuild
+            1 * mockBuild.changeSet >> changes
+
+        and:
+            actual.is(changes)
     }
 }

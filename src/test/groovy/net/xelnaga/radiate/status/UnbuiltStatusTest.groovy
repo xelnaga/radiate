@@ -4,6 +4,7 @@ import hudson.model.Cause
 import hudson.model.Job
 import spock.lang.Specification
 import hudson.model.Result
+import hudson.scm.ChangeLogSet
 
 class UnbuiltStatusTest extends Specification {
 
@@ -64,6 +65,16 @@ class UnbuiltStatusTest extends Specification {
 
         then:
             result == Result.NOT_BUILT
+            0 * _._
+    }
+
+    def 'get changes'() {
+
+        when:
+            Iterable<ChangeLogSet.Entry> changes = status.changes
+
+        then:
+            !changes.iterator().hasNext()
             0 * _._
     }
 }

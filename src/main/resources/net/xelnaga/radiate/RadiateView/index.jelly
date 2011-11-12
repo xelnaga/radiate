@@ -3,21 +3,27 @@
 <html>
 <head>
     <title>Radiate</title>
-    <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/radiate/css/radiate.css" />
+    <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/radiate/css/normalize.css" />
+    <link rel="stylesheet/less" type="text/css" href="${rootURL}/plugin/radiate/css/radiate.css.less" />
+    <script type="text/javascript" src="${rootURL}/plugin/radiate/js/less.js"></script>
 </head>
 <body>
     <ol id="jobs">
 	<j:forEach var="status" items="${it.statuses}">
 	    <li>
 	        <h2>${status.name} #${status.buildNumber}</h2>
-
+	        <p>${status.duration} ms</p>
+	        <p>${status.result}</p>
 	        <ol class="causes">
 	        <j:forEach var="cause" items="${status.causes}">
 	            <li>${cause.shortDescription}</li>
 	        </j:forEach>
 	        </ol>
-	        <p>${status.duration} ms</p>
-	        <p>${status.result}</p>
+	        <ol class="changes">
+	        <j:forEach var="change" items="${status.changes}">
+	            <li>${change.msg}</li>
+	        </j:forEach>
+	        </ol>
 	    </li>
 	</j:forEach>
     </ol>

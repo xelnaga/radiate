@@ -1,10 +1,12 @@
 package net.xelnaga.radiate.status;
 
-import hudson.model.Cause;
-import hudson.model.Job;
-import hudson.model.Result;
+import hudson.model.*;
+import hudson.scm.ChangeLogSet;
+import hudson.util.RunList;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class StandardStatus extends Status {
 
@@ -35,5 +37,17 @@ public class StandardStatus extends Status {
     @Override
     public Result getResult() {
         return job.getLastBuild().getResult();
+    }
+
+    @Override
+    public Iterable<ChangeLogSet.Entry> getChanges() {
+
+        Run run = job.getLastBuild();
+        if (run instanceof Build) {
+            Build build = (Build) run;
+            return build.getChangeSet();
+        }
+
+        return new ArrayList<ChangeLogSet.Entry>();
     }
 }

@@ -3,6 +3,7 @@ package net.xelnaga.radiate.status;
 import hudson.model.Cause;
 import hudson.model.Job;
 import hudson.model.Result;
+import hudson.scm.ChangeLogSet;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public abstract class Status {
     public abstract int getBuildNumber();
     public abstract long getDuration();
     public abstract Result getResult();
+    public abstract Iterable<ChangeLogSet.Entry> getChanges();
 }

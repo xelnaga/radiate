@@ -3,6 +3,7 @@ package net.xelnaga.radiate.status;
 import hudson.model.Cause;
 import hudson.model.Job;
 import hudson.model.Result;
+import hudson.scm.ChangeLogSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,5 +32,10 @@ class UnbuiltStatus extends Status {
     @Override
     public Result getResult() {
         return Result.NOT_BUILT;
+    }
+
+    @Override
+    public Iterable<ChangeLogSet.Entry> getChanges() {
+        return new ArrayList<ChangeLogSet.Entry>();
     }
 }
