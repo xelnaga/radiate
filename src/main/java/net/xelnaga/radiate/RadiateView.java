@@ -5,7 +5,6 @@ import hudson.model.Job;
 import hudson.model.ListView;
 import hudson.model.TopLevelItem;
 import hudson.model.ViewDescriptor;
-import net.xelnaga.radiate.status.StandardStatus;
 import net.xelnaga.radiate.status.Status;
 import net.xelnaga.radiate.status.StatusFactory;
 import org.kohsuke.stapler.DataBoundConstructor;

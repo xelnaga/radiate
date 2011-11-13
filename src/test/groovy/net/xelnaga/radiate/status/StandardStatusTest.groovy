@@ -1,12 +1,8 @@
 package net.xelnaga.radiate.status
 
-import spock.lang.Specification
-import hudson.model.Job
-import hudson.model.Cause
-import hudson.model.Run
-import hudson.model.Result
 import hudson.scm.ChangeLogSet
-import hudson.model.Build
+import spock.lang.Specification
+import hudson.model.*
 
 class StandardStatusTest extends Specification {
 
@@ -65,6 +61,23 @@ class StandardStatusTest extends Specification {
             number == 69
     }
 
+    def 'get timestamp'() {
+
+        given:
+            Calendar calendar = new GregorianCalendar(1, 2, 3, 4, 5, 6)
+
+        when:
+            String actual = status.timestamp
+
+        then:
+            1 * mockJob.lastBuild >> mockRun
+            1 * mockRun.timestamp >> calendar
+            0 * _._
+
+        and:
+            actual == "04:05 AM Thursday, 03 March"
+    }
+
     def 'get duration'() {
 
         when:
@@ -91,6 +104,41 @@ class StandardStatusTest extends Specification {
 
         and:
             actual.is(Result.ABORTED)
+    }
+
+    def 'get status'() {
+
+        when:
+            State actual = status.state
+
+        then:
+            1 * mockJob.lastBuild >> mockRun
+            1 * mockRun.building >> false
+            1 * mockRun.result >> result
+            0 * _._
+            actual == state
+
+        where:
+            result           | state
+            Result.SUCCESS   | State.Success
+            Result.FAILURE   | State.Failure
+            Result.ABORTED   | State.Aborted
+            Result.NOT_BUILT | State.NotBuilt
+            Result.UNSTABLE  | State.Unstable
+            null             | State.Unknown
+
+    }
+
+    def 'get status when building' () {
+
+        when:
+            State actual = status.state
+
+        then:
+            1 * mockJob.lastBuild >> mockRun
+            1 * mockRun.building >> true
+            0 * _._
+            actual == State.Building
     }
 
     def 'get changes'() {

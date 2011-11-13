@@ -2,9 +2,9 @@ package net.xelnaga.radiate.status
 
 import hudson.model.Cause
 import hudson.model.Job
-import spock.lang.Specification
 import hudson.model.Result
 import hudson.scm.ChangeLogSet
+import spock.lang.Specification
 
 class UnbuiltStatusTest extends Specification {
 
@@ -48,6 +48,15 @@ class UnbuiltStatusTest extends Specification {
             0 * _._
     }
 
+    def 'get timestamp'() {
+
+        when:
+            String timestamp = status.timestamp
+
+        then:
+            timestamp == ""
+            0 * _._
+    }
     def 'get duration'() {
 
         when:
@@ -65,6 +74,16 @@ class UnbuiltStatusTest extends Specification {
 
         then:
             result == Result.NOT_BUILT
+            0 * _._
+    }
+
+    def 'get state'() {
+
+        when:
+            State state = status.state
+
+        then:
+            state == State.NotBuilt
             0 * _._
     }
 

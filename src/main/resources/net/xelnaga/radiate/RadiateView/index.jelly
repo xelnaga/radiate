@@ -6,24 +6,35 @@
     <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/radiate/css/normalize.css" />
     <link rel="stylesheet/less" type="text/css" href="${rootURL}/plugin/radiate/css/radiate.css.less" />
     <script type="text/javascript" src="${rootURL}/plugin/radiate/js/less.js"></script>
+    <script type="text/javascript" src="${rootURL}/plugin/radiate/js/jquery.js"></script>
+    <meta http-equiv="refresh" content="10" />
 </head>
 <body>
+    <ol id="menu">
+        <li><a href="${rootURL}/">Home</a></li>
+        <li><a href="${rootURL}/view/${it.viewName}/configure">Configure</a></li>
+    </ol>
     <ol id="jobs">
 	<j:forEach var="status" items="${it.statuses}">
-	    <li>
-	        <h2>${status.name} #${status.buildNumber}</h2>
-	        <p>${status.duration} ms</p>
-	        <p>${status.result}</p>
+	    <li class="${status.state.name().toLowerCase()}">
+	        <h2>${status.name}</h2>
+	        <div class="timestamp">${status.timestamp}</div>
+	        <div class="duration">${status.duration}</div>
 	        <ol class="causes">
 	        <j:forEach var="cause" items="${status.causes}">
 	            <li>${cause.shortDescription}</li>
 	        </j:forEach>
 	        </ol>
+	        <j:if test="${status.state.name() != 'NotBuilt'}">
 	        <ol class="changes">
+	        <j:if test="${!status.changes.hasNext()}">
+                <li>No SCM changes</li>
+	        </j:if>
 	        <j:forEach var="change" items="${status.changes}">
 	            <li>${change.msg}</li>
 	        </j:forEach>
 	        </ol>
+	        </j:if>
 	    </li>
 	</j:forEach>
     </ol>

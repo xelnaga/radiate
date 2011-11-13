@@ -1,17 +1,82 @@
-ol, ul {
+html, body, h1, h2, h3, h3, ol, ul {
     margin: 0;
     padding: 0;
+}
+
+ol, ul {
     list-style-type: none;
 }
 
 ol#jobs {
-    margin: 20px;
+    margin: 20px auto;
     list-style-type: none;
+    max-width: 1280px;
+}
+
+ol#jobs > li:first-child {
+    margin: 0 20px 20px 20px;
 }
 
 ol#jobs > li {
-    margin: 20px 0;
-    padding: 5px;
+    position: relative;
+    margin: 20px 20px;
+    padding: 5px 10px;
     border: solid 1px black;
-    min-height: 100px;
+    min-height: 80px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px #000000;
+
+    h2, .duration {
+        font-size: 2.0em;
+    }
+
+    h2, .duration, .timestamp {
+        text-shadow: 1px 1px 1px #ffffff;
+    }
+
+    .duration {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+    }
+
+    ol.causes {
+        margin-top: 20px;
+        list-style-type: square;
+        list-style-position: inside;
+        text-shadow: 1px 1px 1px #000000;
+        color: yellow;
+    }
+
+    ol.changes {
+        list-style-type: circle;
+        list-style-position: inside;
+        text-shadow: 1px 1px 1px #000000;
+        color: white;
+    }
 }
+
+@opacity: 1.00;
+
+ol#jobs > li.success {
+    background: -moz-linear-gradient(top, rgba(180, 221, 180, @opacity) 0%, rgba(131, 199, 131, @opacity) 17%, rgba(82, 177, 82, @opacity) 33%, rgba(0, 138, 0, @opacity) 67%, rgba(0, 87, 0, @opacity) 83%, rgba(0, 36, 0, @opacity) 100%);
+}
+
+ol#jobs > li.building {
+    background: -moz-linear-gradient(top, rgba(221, 221, 180, @opacity) 0%, rgba(199, 199, 131, @opacity) 17%, rgba(177, 177, 82, @opacity) 33%, rgba(138, 138, 0, @opacity) 67%, rgba(87, 87, 0, @opacity) 83%, rgba(36, 36, 0, @opacity) 100%);
+}
+
+ol#jobs > li.unstable,
+ol#jobs > li.failure {
+    background: -moz-linear-gradient(top, rgba(221, 180, 180, @opacity) 0%, rgba(199, 131, 131, @opacity) 17%, rgba(177, 82, 82, @opacity) 33%, rgba(138, 0, 0, @opacity) 67%, rgba(87, 0, 0, @opacity) 83%, rgba(36, 0, 0, @opacity) 100%);
+}
+
+ol#jobs > li.aborted {
+    background: -moz-linear-gradient(top, rgba(221, 180, 221, @opacity) 0%, rgba(199, 131, 199, @opacity) 17%, rgba(177, 82, 177, @opacity) 33%, rgba(138, 0, 138, @opacity) 67%, rgba(87, 0, 87, @opacity) 83%, rgba(36, 0, 36, @opacity) 100%);
+}
+
+ol#jobs > li.unknown,
+ol#jobs > li.notbuilt {
+    background: -moz-linear-gradient(top, rgba(221, 221, 221, @opacity) 0%, rgba(199, 199, 199, @opacity) 17%, rgba(177, 177, 177, @opacity) 33%, rgba(138, 138, 138, @opacity) 67%, rgba(87, 87, 87, @opacity) 83%, rgba(36, 36, 36, @opacity) 100%);
+}
+

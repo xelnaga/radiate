@@ -6,6 +6,7 @@ import hudson.model.Result;
 import hudson.scm.ChangeLogSet;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 class UnbuiltStatus extends Status {
@@ -25,6 +26,11 @@ class UnbuiltStatus extends Status {
     }
 
     @Override
+    public String getTimestamp() {
+        return "";
+    }
+
+    @Override
     public long getDuration() {
         return 0;
     }
@@ -32,6 +38,11 @@ class UnbuiltStatus extends Status {
     @Override
     public Result getResult() {
         return Result.NOT_BUILT;
+    }
+
+    @Override
+    public State getState() {
+        return State.NotBuilt;
     }
 
     @Override
