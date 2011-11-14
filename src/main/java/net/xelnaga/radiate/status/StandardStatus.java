@@ -39,9 +39,8 @@ public class StandardStatus extends Status {
     }
 
     @Override
-    public String getTimestamp() {
-        Calendar calendar = job.getLastBuild().getTimestamp();
-        return new SimpleDateFormat("hh:mm a EEEE, dd MMMM").format(calendar.getTime());
+    public long getTimestamp() {
+        return job.getLastBuild().getTimestamp().getTimeInMillis();
     }
 
     @Override

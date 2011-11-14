@@ -51,10 +51,10 @@ class UnbuiltStatusTest extends Specification {
     def 'get timestamp'() {
 
         when:
-            String timestamp = status.timestamp
+            long timestamp = status.timestamp
 
         then:
-            timestamp == ""
+            timestamp == 0
             0 * _._
     }
     def 'get duration'() {

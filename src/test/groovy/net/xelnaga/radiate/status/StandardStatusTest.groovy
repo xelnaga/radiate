@@ -64,10 +64,10 @@ class StandardStatusTest extends Specification {
     def 'get timestamp'() {
 
         given:
-            Calendar calendar = new GregorianCalendar(1, 2, 3, 4, 5, 6)
+            Calendar calendar = new GregorianCalendar(2011, 2, 3, 4, 5, 6)
 
         when:
-            String actual = status.timestamp
+            long actual = status.timestamp
 
         then:
             1 * mockJob.lastBuild >> mockRun
@@ -75,7 +75,7 @@ class StandardStatusTest extends Specification {
             0 * _._
 
         and:
-            actual == "04:05 AM Thursday, 03 March"
+            actual == 1299125106000L
     }
 
     def 'get duration'() {

@@ -26,8 +26,8 @@ class UnbuiltStatus extends Status {
     }
 
     @Override
-    public String getTimestamp() {
-        return "";
+    public long getTimestamp() {
+        return 0;
     }
 
     @Override
