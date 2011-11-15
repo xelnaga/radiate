@@ -6,7 +6,6 @@ import hudson.model.Result;
 import hudson.scm.ChangeLogSet;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 class UnbuiltStatus extends Status {

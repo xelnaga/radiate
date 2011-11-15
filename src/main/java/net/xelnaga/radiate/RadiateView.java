@@ -7,7 +7,7 @@ import hudson.model.TopLevelItem;
 import hudson.model.ViewDescriptor;
 import net.xelnaga.radiate.status.Status;
 import net.xelnaga.radiate.status.StatusFactory;
-import net.xelnaga.radiate.status.StatusJsonSerializer;
+import net.xelnaga.radiate.status.serializer.StatusJsonSerializer;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.util.ArrayList;
