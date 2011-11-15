@@ -1,0 +1,4 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler">
+<st:contentType value="application/json" />
+${it.json}
+</j:jelly>
