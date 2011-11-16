@@ -8,7 +8,6 @@
     <script type="text/javascript" src="${rootURL}/plugin/radiate/js/less.js"></script>
     <script type="text/javascript" src="${rootURL}/plugin/radiate/js/jquery.js"></script>
     <script type="text/javascript" src="${rootURL}/plugin/radiate/js/radiate.js"></script>
-    <meta http-equiv="refresh" content="10" />
 </head>
 <body>
     <ol id="menu">
@@ -16,7 +15,7 @@
         <li><a href="${rootURL}/view/${it.viewName}/configure">Configure</a></li>
     </ol>
     <script type="text/javascript">
-        refresh("${it.viewName}");
+        refresh("${it.viewName}")
     </script>
 </body>
 </html>

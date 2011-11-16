@@ -45,7 +45,11 @@ function refresh(view) {
             jobs.append(job);
         });
 
-        $('body').append(jobs)
+        $('#jobs').remove();
+        $('body').append(jobs);
+
+        var invokation = "refresh('" + view + "')";
+        setTimeout(invokation, 5000);
     });
 }
 
