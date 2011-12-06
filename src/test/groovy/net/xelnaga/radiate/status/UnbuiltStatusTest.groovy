@@ -73,8 +73,11 @@ class UnbuiltStatusTest extends Specification {
             Result result = status.result
 
         then:
-            result == Result.NOT_BUILT
             0 * _._
+        
+        and:
+            result == Result.NOT_BUILT
+            
     }
 
     def 'get state'() {
@@ -83,8 +86,24 @@ class UnbuiltStatusTest extends Specification {
             State state = status.state
 
         then:
-            state == State.NotBuilt
+            1 * mockJob.buildable >> true
             0 * _._
+        
+        and:
+            state == State.NotBuilt         
+    }
+    
+    def 'get state when disabled'() {
+        
+        when:
+            State state = status.state
+        
+        then:
+            1 * mockJob.buildable >> false
+            0 * _._
+        
+        and:
+            state == State.Disabled
     }
 
     def 'get changes'() {
@@ -93,7 +112,10 @@ class UnbuiltStatusTest extends Specification {
             Iterable<ChangeLogSet.Entry> changes = status.changes
 
         then:
-            !changes.iterator().hasNext()
             0 * _._
+        
+        and:
+            !changes.iterator().hasNext()
+            
     }
 }

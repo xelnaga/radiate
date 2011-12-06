@@ -3,9 +3,10 @@ package net.xelnaga.radiate.status;
 import hudson.model.*;
 import hudson.scm.ChangeLogSet;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StandardStatus extends Status {
 
@@ -45,7 +46,14 @@ public class StandardStatus extends Status {
 
     @Override
     public long getDuration() {
-        return job.getLastBuild().getDuration();
+
+        Run build = job.getLastBuild();
+
+        if (job.isBuilding()) {
+            return System.currentTimeMillis() - build.getTimeInMillis();
+        }
+
+        return build.getDuration();
     }
 
     @Override
@@ -55,6 +63,10 @@ public class StandardStatus extends Status {
 
     @Override
     public State getState() {
+
+        if (!job.isBuildable()) {
+            return State.Disabled;
+        }
 
         Run build = job.getLastBuild();
 

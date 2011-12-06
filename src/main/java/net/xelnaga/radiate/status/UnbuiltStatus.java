@@ -41,6 +41,11 @@ class UnbuiltStatus extends Status {
 
     @Override
     public State getState() {
+        
+        if (!job.isBuildable()) {
+            return State.Disabled;
+        }
+
         return State.NotBuilt;
     }
 

@@ -47,7 +47,7 @@ function buildNameMarkup(status) {
 
 function buildTimestampMarkup(status) {
 
-    var timestamp = $('<div/>', { 'class': 'timestamp' })
+    var timestamp = $('<div/>', { 'class': 'timestamp' });
     if (status.timestamp != 0) {
         var date = new Date(status.timestamp);
         timestamp.append(date.toString());
@@ -58,7 +58,7 @@ function buildTimestampMarkup(status) {
 
 function buildDurationMarkup(status) {
 
-    var duration = $('<div/>', { 'class': 'duration' })
+    var duration = $('<div/>', { 'class': 'duration' });
     if (status.duration != 0) {
         duration.append(makeDuration(status.duration));
     }
@@ -104,6 +104,9 @@ function statusComparator(s1, s2) {
 
     if (s1.state == 'unstable' && s2.state != 'unstable') { return -1; }
     if (s1.state != 'unstable' && s2.state == 'unstable') { return  1; }
+
+    if (s1.state == 'disabled' && s2.state != 'disabled') { return -1; }
+    if (s1.state != 'disabled' && s2.state == 'disabled') { return  1; }
 
     if (s1.state == 'notbuilt' && s2.state != 'notbuilt') { return -1; }
     if (s1.state != 'notbuilt' && s2.state == 'notbuilt') { return  1; }

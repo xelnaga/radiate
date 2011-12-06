@@ -8,5 +8,6 @@ public enum State {
     Unstable,
     Aborted,
     NotBuilt,
+    Disabled,
     Unknown
 }

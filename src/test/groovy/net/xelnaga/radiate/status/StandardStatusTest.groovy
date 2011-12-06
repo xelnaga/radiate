@@ -78,12 +78,13 @@ class StandardStatusTest extends Specification {
             actual == 1299125106000L
     }
 
-    def 'get duration'() {
+    def 'get duration when not building'() {
 
         when:
             long duration = status.duration
 
         then:
+            1 * mockJob.building >> false
             1 * mockJob.lastBuild >> mockRun
             1 * mockRun.duration >> 1234L
             0 * _._
@@ -112,10 +113,13 @@ class StandardStatusTest extends Specification {
             State actual = status.state
 
         then:
+            1 * mockJob.buildable >> true
             1 * mockJob.lastBuild >> mockRun
             1 * mockRun.building >> false
             1 * mockRun.result >> result
             0 * _._
+
+        and:
             actual == state
 
         where:
@@ -129,15 +133,31 @@ class StandardStatusTest extends Specification {
 
     }
 
-    def 'get status when building' () {
+    def 'get status when disabled'() {
+     
+        when:
+            State actual = status.state
+        
+        then:
+            1 * mockJob.buildable >> false
+            0 * _._
+        
+        and:
+            actual == State.Disabled
+    }
+
+    def 'get status when building'() {
 
         when:
             State actual = status.state
 
         then:
+            1 * mockJob.buildable >> true
             1 * mockJob.lastBuild >> mockRun
             1 * mockRun.building >> true
             0 * _._
+        
+        and:
             actual == State.Building
     }
 
