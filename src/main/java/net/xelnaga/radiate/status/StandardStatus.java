@@ -15,7 +15,7 @@ public class StandardStatus extends Status {
     static {
         STATE.put(Result.SUCCESS,   State.Success);
         STATE.put(Result.FAILURE,   State.Failure);
-        STATE.put(Result.ABORTED,   State.Aborted);
+        STATE.put(Result.ABORTED,  State.Aborted);
         STATE.put(Result.NOT_BUILT, State.NotBuilt);
         STATE.put(Result.UNSTABLE,  State.Unstable);
     }
@@ -48,12 +48,20 @@ public class StandardStatus extends Status {
     public long getDuration() {
 
         Run build = job.getLastBuild();
-
+        
         if (job.isBuilding()) {
             return System.currentTimeMillis() - build.getTimeInMillis();
         }
 
         return build.getDuration();
+    }
+    
+    @Override
+    public long getEstimate() {
+        
+        Run build = job.getLastBuild();
+
+        return build.getEstimatedDuration();
     }
 
     @Override

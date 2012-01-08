@@ -78,7 +78,7 @@ class StandardStatusTest extends Specification {
             actual == 1299125106000L
     }
 
-    def 'get duration when not building'() {
+    def 'get duration'() {
 
         when:
             long duration = status.duration
@@ -91,6 +91,20 @@ class StandardStatusTest extends Specification {
 
         and:
             duration == 1234L
+    }
+    
+    def 'get estimate'() {
+        
+        when:
+            long estimate = status.estimate
+        
+        then:
+            1 * mockJob.lastBuild >> mockRun
+            1 * mockRun.estimatedDuration >> 2345L
+            0 * _._
+
+        and:
+            estimate == 2345L
     }
 
     def 'get result'() {

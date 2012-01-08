@@ -31,13 +31,14 @@ class StatusJsonSerializerSpec extends Specification {
             1 * mockStatus.state >> State.Failure
             1 * mockStatus.timestamp >> 12345678L
             1 * mockStatus.duration >> 1234L
+            1 * mockStatus.estimate >> 2345L
             1 * mockStatus.causes >> [ mockCause ]
             1 * mockStatus.changes >> [ mockChange ]
             1 * mockCause.shortDescription >> "Effect"
             1 * mockChange.msg >> "Some message"
             0 * _._
 
-            json == '{"name":"somename","state":"failure","timestamp":12345678,"duration":1234,"causes":["Effect"],"changes":["Some message"]}'
+            json == '{"name":"somename","state":"failure","timestamp":12345678,"duration":1234,"estimate":2345,"causes":["Effect"],"changes":["Some message"]}'
     }
 
     def 'to json for list'() {
@@ -53,6 +54,7 @@ class StatusJsonSerializerSpec extends Specification {
             1 * mockStatuses[0].state >> State.Failure
             1 * mockStatuses[0].timestamp >> 12345678L
             1 * mockStatuses[0].duration >> 1234L
+            1 * mockStatuses[0].estimate >> 2345L
             1 * mockStatuses[0].causes >> []
             1 * mockStatuses[0].changes >> []
 
@@ -61,11 +63,12 @@ class StatusJsonSerializerSpec extends Specification {
             1 * mockStatuses[1].state >> State.Success
             1 * mockStatuses[1].timestamp >> 87654321L
             1 * mockStatuses[1].duration >> 4321L
+            1 * mockStatuses[1].estimate >> 3456L
             1 * mockStatuses[1].causes >> []
             1 * mockStatuses[1].changes >> []
 
         and:
             0 * _._
-            json == '[{"name":"somename","state":"failure","timestamp":12345678,"duration":1234,"causes":[],"changes":[]},{"name":"othername","state":"success","timestamp":87654321,"duration":4321,"causes":[],"changes":[]}]'
+            json == '[{"name":"somename","state":"failure","timestamp":12345678,"duration":1234,"estimate":2345,"causes":[],"changes":[]},{"name":"othername","state":"success","timestamp":87654321,"duration":4321,"estimate":3456,"causes":[],"changes":[]}]'
     }
 }

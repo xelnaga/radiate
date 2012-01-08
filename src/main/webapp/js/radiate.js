@@ -14,9 +14,32 @@ function refresh(view) {
         $('#jobs').remove();
         $('body').append(jobs);
 
+        var color = getScreenColor(statuses);
+        $('body').removeClass('red');
+        $('body').removeClass('yellow');
+        $('body').addClass(color);
+
         var invokation = "refresh('" + view + "')";
-        setTimeout(invokation, 2000);
+        setTimeout(invokation, 1000);
     });
+}
+
+function getScreenColor(statuses) {
+
+    var color = 'green';
+
+    $.each(statuses, function(key, status) {
+
+        if (status.state == 'failure') {
+            color = 'red';
+        } else {
+            if (color == 'green' && status.state != 'success') {
+                color = 'yellow';
+            }
+        }
+    });
+
+    return color;
 }
 
 function buildStatusMarkup(status) {
@@ -28,6 +51,9 @@ function buildStatusMarkup(status) {
 
     var timestamp = buildTimestampMarkup(status);
     job.append(timestamp);
+
+    var progress = buildProgressMarkup(status);
+    timestamp.append(progress);
 
     var duration = buildDurationMarkup(status);
     job.append(duration);
@@ -50,13 +76,69 @@ function buildNameMarkup(status) {
 function buildTimestampMarkup(status) {
 
     var timestamp = $('<div/>', { 'class': 'timestamp' });
+
+    if (status.state == 'building') {
+        timestamp.append('&nbsp;');
+        return timestamp;
+    }
+
     if (status.timestamp != 0) {
         var date = new Date(status.timestamp);
-        timestamp.append(date.toString());
+        timestamp.append(buildTimestampFormat(date));
     }
 
     return timestamp;
 }
+
+var daysOfWeek  = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
+var monthsOfYear = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+
+function buildTimestampFormat(date) {
+
+    var meredium = 'AM';
+    var hours = date.getHours();
+    if (hours > 12) {
+        hours = hours - 12;
+        meredium = 'PM';
+    }
+
+    var timestamp = hours + ':';
+    var minutes = date.getMinutes();
+    if (minutes < 10) {
+        timestamp += '0';
+    }
+    timestamp += date.getMinutes() + ' ' + meredium;
+
+    if (!isToday(date)) {
+        timestamp = timestamp + ' ' + daysOfWeek[date.getDay()] + ', ' + date.getDate() + ' ' + monthsOfYear[date.getMonth()] + ' ' + date.getFullYear();
+    }
+
+    return timestamp;
+}
+
+function isToday(date) {
+
+    var today = new Date();
+
+    return today.getDate() == date.getDate() && today.getMonth() == date.getMonth() && today.getFullYear() == date.getFullYear();
+}
+
+function buildProgressMarkup(status) {
+
+    var progress = $('<div/>', { 'class': 'progress' });
+    var completed = $('<div/>', { 'class': 'completed' });
+
+    var percentage = 100.0 / status.estimate * status.duration;
+    if (status.estimate == -1 || percentage > 100.0) {
+        percentage = 95.0;
+    }
+
+    completed.width(percentage + '%');
+    progress.append(completed);
+
+    return progress
+}
+
 
 function buildDurationMarkup(status) {
 

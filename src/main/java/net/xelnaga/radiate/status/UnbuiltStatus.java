@@ -35,6 +35,11 @@ class UnbuiltStatus extends Status {
     }
 
     @Override
+    public long getEstimate() {
+        return 0;
+    }
+
+    @Override
     public Result getResult() {
         return Result.NOT_BUILT;
     }

@@ -30,6 +30,7 @@ public class StatusJsonSerializer extends BaseJsonSerializer {
         addState();
         addTimestamp();
         addDuration();
+        addEstimate();
         addCauses();
         addChanges();
 
@@ -57,6 +58,12 @@ public class StatusJsonSerializer extends BaseJsonSerializer {
     private void addDuration() {
 
         String element = makeQuotedKey("duration") + _status.getDuration();
+        _elements.add(element);
+    }
+
+    private void addEstimate() {
+
+        String element = makeQuotedKey("estimate") + _status.getEstimate();
         _elements.add(element);
     }
 

@@ -23,6 +23,7 @@ public abstract class Status {
     public abstract int getBuildNumber();
     public abstract long getTimestamp();
     public abstract long getDuration();
+    public abstract long getEstimate();
     public abstract Result getResult();
     public abstract State getState();
     public abstract Iterable<ChangeLogSet.Entry> getChanges();

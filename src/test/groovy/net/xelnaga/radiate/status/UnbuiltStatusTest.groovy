@@ -67,6 +67,16 @@ class UnbuiltStatusTest extends Specification {
             0 * _._
     }
 
+    def 'get estimate'() {
+
+        when:
+            long estimate = status.estimate
+
+        then:
+            estimate == 0
+            0 * _._
+    }
+
     def 'get result'() {
 
         when:
