@@ -35,8 +35,10 @@ function buildStatusMarkup(status) {
     var causes = buildCausesMarkup(status);
     job.append(causes);
 
-    var changes = buildChangesMarkup(status);
-    job.append(changes);
+    if (status.changes.length > 0) {
+        var changes = buildChangesMarkup(status);
+        job.append(changes);
+    }
 
     return job;
 }
@@ -79,14 +81,9 @@ function buildCausesMarkup(status) {
 function buildChangesMarkup(status) {
 
     var changes = $('<ol/>', { 'class': 'changes' });
-    if (status.changes.length == 0) {
-        var element = $('<li/>').append('No SCM changes');
-        changes.append(element);
-    } else {
-        $.each(status.changes, function(key, change) {
-            changes.append($('<li/>').append(change));
-        });
-    }
+    $.each(status.changes, function(key, change) {
+        changes.append($('<li/>').append(change));
+    });
 
     return changes;
 }

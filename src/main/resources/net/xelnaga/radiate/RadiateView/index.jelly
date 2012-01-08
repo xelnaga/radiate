@@ -12,8 +12,8 @@
 </head>
 <body>
     <ol id="menu">
-        <li><a href="${rootURL}/">Home</a></li>
-        <li><a href="${rootURL}/view/${it.viewName}/configure">Configure</a></li>
+        <li><a class="dashboard" href="${rootURL}/" title="Dashboard"></a></li>
+        <li><a class="editview" href="${rootURL}/view/${it.viewName}/configure" title="Edit View"></a></li>
     </ol>
     <script type="text/javascript">
         refresh("${it.viewName}")

@@ -6,6 +6,48 @@ html, body, h1, h2, h3, h3, ol, ul {
 ol, ul {
     list-style-type: none;
 }
+    
+ol#menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    width: 128px;
+    height:128px;
+    padding: 5px;
+}
+
+ol#menu:hover {
+
+    background: rgba(255, 255, 255, 1.00);
+    width: auto;
+    height: auto;
+    border: solid 1px #444;
+    border-radius: 10px 0 10px 10px;
+    box-shadow: 2px 2px 5px #000000;
+
+    a {
+        display: block;
+        width: 128px;
+        height: 128px;
+    }
+    
+    a.dashboard {
+        background: url(../images/dashboard.png);
+    }
+    
+    a.editview {
+        background: url(../images/editview.png);
+    }
+    
+    li {
+        border-radius: 10px;
+    }
+
+    li:hover {
+        background-color: #eeeeee;
+    }
+}
 
 ol#jobs {
     margin: 20px auto;
