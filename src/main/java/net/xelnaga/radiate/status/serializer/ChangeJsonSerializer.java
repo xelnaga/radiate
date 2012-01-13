@@ -20,7 +20,7 @@ public class ChangeJsonSerializer extends BaseJsonSerializer {
 
     public String toJson(ChangeLogSet.Entry change) {
 
-        String message = change.getMsg();
+        String message = change.getMsg().replaceAll("'", "");
         return makeQuotedAndEscaped(message);
     }
 }
