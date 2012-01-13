@@ -90,16 +90,16 @@ function buildTimestampMarkup(status) {
     return timestamp;
 }
 
-var daysOfWeek  = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
-var monthsOfYear = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+var daysOfWeek  = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
+var monthsOfYear = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
 function buildTimestampFormat(date) {
 
-    var meredium = 'AM';
+    var meredium = 'am';
     var hours = date.getHours();
     if (hours > 12) {
         hours = hours - 12;
-        meredium = 'PM';
+        meredium = 'pm';
     }
 
     var timestamp = hours + ':';
@@ -107,10 +107,14 @@ function buildTimestampFormat(date) {
     if (minutes < 10) {
         timestamp += '0';
     }
-    timestamp += date.getMinutes() + ' ' + meredium;
+    timestamp += date.getMinutes()  + meredium;
 
     if (!isToday(date)) {
-        timestamp = timestamp + ' ' + daysOfWeek[date.getDay()] + ', ' + date.getDate() + ' ' + monthsOfYear[date.getMonth()] + ' ' + date.getFullYear();
+        timestamp = timestamp + ' ' + daysOfWeek[date.getDay()];
+    }
+
+    if (!isToday(date) && !isLastWeek(date)) {
+        timestamp = timestamp + ', ' + date.getDate() + ' ' + monthsOfYear[date.getMonth()] + ' ' + date.getFullYear();
     }
 
     return timestamp;
@@ -123,6 +127,14 @@ function isToday(date) {
     return today.getDate() == date.getDate() && today.getMonth() == date.getMonth() && today.getFullYear() == date.getFullYear();
 }
 
+function isLastWeek(date) {
+
+    var now = new Date().getTime();
+    var weekAgo = new Date(now - (1000 * 60 * 60 * 24 * 7));
+
+    return date > weekAgo;
+}
+
 function buildProgressMarkup(status) {
 
     var progress = $('<div/>', { 'class': 'progress' });
@@ -130,7 +142,7 @@ function buildProgressMarkup(status) {
 
     var percentage = 100.0 / status.estimate * status.duration;
     if (status.estimate == -1 || percentage > 100.0) {
-        percentage = 95.0;
+        percentage = 0.0;
     }
 
     completed.width(percentage + '%');
