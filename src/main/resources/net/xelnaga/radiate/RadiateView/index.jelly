@@ -1,4 +1,5 @@
-<j:jelly xmlns:j="jelly:core" xmlns:x="jelly:xml">
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:x="jelly:xml">
+<st:contentType value="text/html" />
 <x:doctype name="html"/>
 <html>
 <head>
